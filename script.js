@@ -1864,6 +1864,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function sendEmail() {
+    const templateParams = {
+        to_email: "hungnguyn20@gmail.com", // Thay bằng email của bạn
+        selected_locations: selectedLocations.join(', '),
+        selected_foods: selectedFoods.join(', '),
+        selected_drinks: selectedDrinks.join(', ')
+    };
+
+    emailjs.send("service_pcy67sk", "template_if4kihj", templateParams)
+        .then(response => {
+            console.log("✅ Email sent successfully:", response);
+            alert("Email đã được gửi!");
+        })
+        .catch(error => {
+            console.error("❌ Error sending email:", error);
+            alert("Có lỗi xảy ra khi gửi email.");
+        });
+}
+
+// Gọi hàm này khi người dùng hoàn thành lựa chọn
+document.getElementById("confirm-drink-btn").addEventListener("click", sendEmail);
+
     // Initialize status containers if needed
     if (foodCard) updateFoodSelectionStatus();
     if (drinksCard) updateDrinkSelectionStatus();
