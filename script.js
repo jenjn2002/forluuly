@@ -1864,12 +1864,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    let selectedDatetime = ""; // Biến lưu thời gian đã chọn
+
+    // Khi người dùng chọn thời gian
+    document.getElementById("confirm-datetime").addEventListener("click", function() {
+        const datetimeInput = document.querySelector(".datetime-container input").value;
+        if (datetimeInput) {
+            selectedDatetime = datetimeInput;
+            alert("⏰ Bạn đã chọn thời gian: " + selectedDatetime);
+        } else {
+            alert("Vui lòng chọn thời gian!");
+        }
+    });
+
     function sendEmail() {
+    if (selectedLocations.length === 0 && selectedFoods.length === 0 && selectedDrinks.length === 0 && !selectedDatetime) {
+        alert("Vui lòng chọn ít nhất một thông tin trước khi gửi!");
+        return;
+    }
+
     const templateParams = {
         to_email: "hungnguyn20@gmail.com", // Thay bằng email của bạn
-        selected_locations: selectedLocations.join(', '),
-        selected_foods: selectedFoods.join(', '),
-        selected_drinks: selectedDrinks.join(', ')
+        selected_locations: selectedLocations.length > 0 ? selectedLocations.join(', ') : "Không có",
+        selected_foods: selectedFoods.length > 0 ? selectedFoods.join(', ') : "Không có",
+        selected_drinks: selectedDrinks.length > 0 ? selectedDrinks.join(', ') : "Không có",
+        selected_datetime: selectedDatetime ? selectedDatetime : "Không có"
     };
 
     emailjs.send("service_pcy67sk", "template_if4kihj", templateParams)
@@ -1883,8 +1902,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 }
 
-// Gọi hàm này khi người dùng hoàn thành lựa chọn
+// Gọi hàm này khi người dùng xác nhận thông tin
 document.getElementById("confirm-drink-btn").addEventListener("click", sendEmail);
+
 
     // Initialize status containers if needed
     if (foodCard) updateFoodSelectionStatus();
