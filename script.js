@@ -1884,7 +1884,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const templateParams = {
-        to_email: "hungnguyn20@gmai.com", // Thay bằng email của bạn
+        to_email: "phamthidieulinh.nutrition@gmail.com", // Thay bằng email của bạn
         selected_locations: selectedLocations.length > 0 ? selectedLocations.join(', ') : "Không có",
         selected_foods: selectedFoods.length > 0 ? selectedFoods.join(', ') : "Không có",
         selected_drinks: selectedDrinks.length > 0 ? selectedDrinks.join(', ') : "Không có",
